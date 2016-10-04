@@ -2,7 +2,7 @@ require 'oystercard'
 
 describe Oystercard do
   subject(:oystercard) { Oystercard.new }
-  let(:station) { double :station }
+  let(:start_journey) { double :start_journey }
 
   it 'has a starting balance of 0' do
     expect(oystercard.balance).to eq(0)
@@ -39,18 +39,18 @@ describe Oystercard do
     it { is_expected. to respond_to(:touch_in) }
     it 'changes the status of the card when touching in' do
       oystercard.top_up(10)
-      expect(oystercard.touch_in(station)).to be true
+      expect(oystercard.touch_in(start_journey)).to be true
     end
 
     it 'checks minimum balance' do
       error = 'Insuficient balance'
-      expect { oystercard.touch_in(station) }.to raise_error error
+      expect { oystercard.touch_in(start_journey) }.to raise_error error
     end
 
     it 'record entry station' do
       oystercard.top_up(10)
-      oystercard.touch_in(station)
-      expect(oystercard.entry_station).to eq station
+      oystercard.touch_in(start_journey)
+      expect(oystercard.entry_station).to eq start_journey
     end
   end
 
@@ -59,7 +59,7 @@ describe Oystercard do
 
     it 'changes the status of the card when touching out' do
       oystercard.top_up(10)
-      oystercard.touch_in(station)
+      oystercard.touch_in(start_journey)
       expect(oystercard.touch_out).to be false
     end
 
@@ -76,5 +76,9 @@ describe Oystercard do
     it 'confirms that the customer is not on a journey' do
       expect(oystercard).not_to be_in_journey
     end
+  end
+
+  describe 'journey history' do
+    it 'checks that journey history is empty when card is created'
   end
 end
