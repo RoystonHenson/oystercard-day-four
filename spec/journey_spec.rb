@@ -24,10 +24,13 @@ describe '#starting_journey' do
 end
 
 describe '#ending_journey' do
-
+  it 'record exit station' do
+    journey.ending_journey('bank')
+    expect(journey.exit_station).to eq 'bank'
+  end
 end
 
-describe '#in_journey?' do
+describe '#in_journey?' do # update this to be complete ??
   it { is_expected.to respond_to(:in_journey?) }
   it 'confirms that the customer is not on a journey' do
     expect(journey).not_to be_in_journey

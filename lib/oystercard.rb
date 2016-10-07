@@ -11,10 +11,11 @@ class Oystercard
   MIN_CHARGE = 1.5
   PENALTY_FARE = 6
 
-  def initialize(balance = 0, travel = false)
+  def initialize(balance = 0)
     @balance = balance
-    @travel = false
+    @current_journey = false
     @journey_history = []
+
   end
 
   def top_up(value)
@@ -31,12 +32,19 @@ class Oystercard
     deduct(MIN_CHARGE)
     # Need to add code for checking if there is an exit station; if not
     #deduct penaly fare rather than minimum fare
-
+    
   end
 
   def touch_in
     raise 'Insuficient balance' if balance < MIN_BALANCE
   end
 
+  def journey_history
+    @journey_history
+  end
+
+  def store_journey
+    @journey_history << @current_journey
+  end
 
 end
