@@ -3,12 +3,11 @@ require 'oystercard'
 
 class Journey
 
-  attr_reader :entry_station, :exit_station, :journey_history, :current_journey
+  attr_reader :entry_station, :exit_station
 
-  def initialize(travel = false)
+  def initialize
     @entry_station = nil
     @exit_station = nil
-    @travel = travel
   end
 
   def starting_journey(station)
@@ -19,8 +18,8 @@ class Journey
     @exit_station = station
   end
 
-  def in_journey?
-    !!entry_station
+  def complete?
+    @entry_station && @exit_station
   end
 
 end

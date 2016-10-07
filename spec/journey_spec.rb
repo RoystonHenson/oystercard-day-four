@@ -30,10 +30,16 @@ describe '#ending_journey' do
   end
 end
 
-describe '#in_journey?' do # update this to be complete ??
-  it { is_expected.to respond_to(:in_journey?) }
-  it 'confirms that the customer is not on a journey' do
-    expect(journey).not_to be_in_journey
+describe '#complete?' do
+  it 'confirms if the journey is incomplete' do
+    journey.starting_journey("station")
+    expect(journey).not_to be_complete
+  end
+
+  it 'confirms if the journey is complete' do
+    journey.starting_journey("station")
+    journey.ending_journey("station")
+    expect(journey).to be_complete
   end
 end
 
