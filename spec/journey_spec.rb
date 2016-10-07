@@ -16,24 +16,15 @@ describe Journey do
   end
 
 describe '#starting_journey' do
-  it { is_expected. to respond_to(:starting_journey) }
-  it 'changes the status of the card when touching in' do
-    expect(journey.starting_journey(start_journey)).to be true
-  end
 
   it 'record entry station' do
     journey.starting_journey('southwark')
-    expect(journey.current_journey[:entry_station]).to eq 'southwark'
+    expect(journey.entry_station).to eq 'southwark'
   end
 end
 
 describe '#ending_journey' do
-  it { is_expected.to respond_to(:ending_journey) }
 
-  it 'changes the status of the card when touching out' do
-    journey.starting_journey(start_journey)
-    expect(journey.ending_journey(end_journey)).to be false
-  end
 end
 
 describe '#in_journey?' do
@@ -43,15 +34,6 @@ describe '#in_journey?' do
   end
 end
 
-describe 'journey history' do
-  it 'checks that journey history is empty when card is created' do
-  expect(journey.journey_history).to eq []
-end
 
-  it 'checks that touching in and out stores a journey' do
-    journey.starting_journey('southwark')
-    journey.ending_journey('aldgate')
-    expect(journey.journey_history).to eq [{entry_station: 'southwark', exit_station: 'aldgate'}]
-  end
-end
+
 end

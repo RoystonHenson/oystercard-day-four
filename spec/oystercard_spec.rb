@@ -63,4 +63,16 @@ describe Oystercard do
         .to change { oystercard.balance }.by(- deducted_value)
     end
 end
+
+describe 'journey history' do
+  it 'checks that journey history is empty when card is created' do
+  expect(oystercard.journey_history).to eq []
+end
+
+  xit 'checks that touching in and out stores a journey' do
+    oystercard.starting_journey('southwark')
+    oystercard.ending_journey('aldgate')
+    expect(oystercard.journey_history).to eq [{entry_station: 'southwark', exit_station: 'aldgate'}]
+  end
+end
 end

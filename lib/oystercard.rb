@@ -3,7 +3,9 @@ require 'station'
 require 'journey'
 
 class Oystercard
-  attr_reader :balance, :max_balance, :min_balance, :entry_station, :exit_station, :journey_history, :current_journey
+
+  attr_reader :balance, :journey_history
+
   MAX_BALANCE = 90
   MIN_BALANCE = 1.5
   MIN_CHARGE = 1.5
@@ -11,15 +13,17 @@ class Oystercard
 
   def initialize(balance = 0, travel = false)
     @balance = balance
+    @travel = false
+    @journey_history = []
   end
 
-  def top_up(top_up_value)
-    raise 'Maximum balance exceeded' if balance + top_up_value > MAX_BALANCE
-    @balance += top_up_value
+  def top_up(value)
+    raise 'Maximum balance exceeded' if balance + value > MAX_BALANCE
+    @balance += value
   end
 
-  def deduct(deducted_value)
-    @balance -= deducted_value
+  def deduct(value)
+    @balance -= value
   end
 
   def touch_out

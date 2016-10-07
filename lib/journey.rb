@@ -3,19 +3,18 @@ require 'oystercard'
 
 class Journey
 
-  attr_reader :balance, :entry_station, :exit_station, :journey_history, :current_journey
+  attr_reader :entry_station, :exit_station, :journey_history, :current_journey
 
   def initialize(travel = false)
     @journey_history = []
+    @entry_station = nil
+    @exit_station = nil
     @current_journey = {entry_station: nil, exit_station: nil}
     @travel = travel
-    @oystercard = Oystercard.new(@balance=0)
-
   end
 
-  def starting_journey(start_journey)
-    @current_journey[:entry_station] = start_journey
-    @travel = true if @travel == false
+  def starting_journey(station)
+    @entry_station = station
   end
 
   def ending_journey(end_journey)
