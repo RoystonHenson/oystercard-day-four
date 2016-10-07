@@ -43,6 +43,21 @@ describe '#complete?' do
   end
 end
 
+  describe '#fare' do
+    context 'when the journey is complete' do
+      it 'returns the minumum fare' do
+        journey.starting_journey("station")
+        journey.ending_journey("station")
+        expect(journey.fare).to eq Journey::MIN_FARE
+      end
+    end
+    context 'when the journey is incomplete' do
+      it 'returns the penalty fare' do
+        journey.ending_journey("station")
+        expect(journey.fare).to eq Journey::PENALTY_FARE
+      end
+    end
+  end
 
 
 end
